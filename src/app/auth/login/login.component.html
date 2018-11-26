@@ -1,0 +1,69 @@
+<div fxFlexFill
+     class="container"
+     fxLayout="column"
+     fxLayoutAlign="center center">
+
+  <div fxLayout="column">
+    <div fxLayout="row"
+         class="fxMargin"
+         fxLayoutAlign="center center">
+      <img src="assets/img/logo-header-negro.png">
+    </div>
+    <div fxLayout="row"
+         class="fxMargin"
+         fxLayoutAlign="center center">
+      <span class="mat-title">Sistema interno con herramientas operativas.</span>
+    </div>
+  </div>
+
+  <mat-card class="login-content"
+            fxLayout="column"
+            fxLayoutAlign="center flex">
+    <div class="progress-bar-container">
+      <mat-progress-bar mode="indeterminate"
+                        *ngIf="progressLinear"></mat-progress-bar>
+    </div>
+
+    <mat-card-subtitle>
+      <span>Ingrese sus credenciales.</span>
+    </mat-card-subtitle>
+
+    <form class="example-form"
+          [formGroup]="authForm"
+          fxLayout="column">
+      <mat-form-field [floatLabel]="Usuario">
+        <mat-label>Usuario</mat-label>
+        <input matInput
+               name="user"
+               formControlName="user"
+               [(ngModel)]="credentials.user"
+               type="text"
+               placeholder="Usuario">
+        <mat-error *ngIf="form.user.invalid">El usuario invalido.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput
+               name="password"
+               type="password"
+               formControlName="password"
+               [(ngModel)]="credentials.password"
+               placeholder="Contraseña">
+        <mat-error *ngIf="form.password.invalid">El password es requerido.</mat-error>
+      </mat-form-field>
+      <div fxLayout="row"
+           fxLayoutAlign="end center">
+        <button mat-raised-button
+                (click)="login()"
+                [disabled]="authForm.invalid"
+                color="primary">Ingresar</button>
+      </div>
+    </form>
+
+  </mat-card>
+
+  <div class="fxMargin">
+    <span class="version-app">Version 0.0.1</span>
+  </div>
+
+</div>

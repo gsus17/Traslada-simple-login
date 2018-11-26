@@ -1,0 +1,20 @@
+<mat-drawer-container class="example-container"
+                      fxLayout="row">
+  <mat-drawer #drawer
+              class="example-sidenav"
+              mode="side">
+    <button (click)="logout()"
+            mat-raised-button>
+      Logout
+    </button>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <button type="button"
+            mat-button
+            (click)="drawer.toggle()">
+      Open menu
+    </button>
+  </div>
+
+</mat-drawer-container>
