@@ -1,21 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MasterPageComponent } from './master-page.component';
-import { Routes, RouterModule } from '@angular/router';
 import { MaterialModule } from '../material/material.module';
+import { MasterPageRoutingModule } from './master-page-routing.module';
+import { MessagingModule } from '../messaging/messaging.module';
 
-const routes: Routes = [
-  {
-    path: '',
-    component: MasterPageComponent
-  }
-];
 @NgModule({
   declarations: [MasterPageComponent],
   imports: [
+    MessagingModule,
     CommonModule,
-    MaterialModule,
-    RouterModule.forChild(routes)
+    MasterPageRoutingModule,
+    MaterialModule
   ]
 })
 export class MasterPageModule { }
