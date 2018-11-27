@@ -8,6 +8,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [],
@@ -21,7 +23,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatSidenavModule,
     ReactiveFormsModule,
     MatProgressBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatToolbarModule,
+    MatIconModule
   ],
   exports: [
     MatCardModule,
@@ -33,7 +37,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatSidenavModule,
     ReactiveFormsModule,
     MatProgressBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatToolbarModule,
+    MatIconModule
   ]
 })
 export class MaterialModule { }
