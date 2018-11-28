@@ -14,7 +14,7 @@ export class LoginService {
   constructor(private authApiService: AuthApiService) { }
 
   /**
-   * Auth process.
+   * Auth login process.
    */
   public login(credentials: Credentials): Promise<any> {
     console.log(`${LoginService.name}::login`);
@@ -26,6 +26,7 @@ export class LoginService {
         .then((data: JsonWebToken) => {
           console.log(`${LoginService.name}::data %`, data);
           this.token = data.access_token;
+          localStorage.setItem('authToken', this.token);
           resolve();
         })
         .catch((err) => {
@@ -35,6 +36,15 @@ export class LoginService {
     });
 
     return promise;
+  }
+
+  /**
+   * Auth logout process.
+   */
+  public logout() {
+    console.log(`${LoginService.name}::login`);
+
+    localStorage.removeItem('authToken');
   }
 
   /**
@@ -52,9 +62,5 @@ export class LoginService {
     };
 
     return loginRequest;
-  }
-
-  public getToken(): string {
-    return this.token;
   }
 }

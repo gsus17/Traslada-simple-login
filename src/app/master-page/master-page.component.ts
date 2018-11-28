@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginService } from '../auth/login/login.service';
 
 @Component({
   selector: 'app-master-page',
@@ -8,7 +9,9 @@ import { Router } from '@angular/router';
 })
 export class MasterPageComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(
+    private loginService: LoginService,
+    private router: Router) { }
 
   ngOnInit() {
   }
@@ -18,6 +21,7 @@ export class MasterPageComponent implements OnInit {
    */
   public logout() {
     console.log(`${MasterPageComponent.name}::logout`);
+    this.loginService.logout();
     this.router.navigate(['login']);
   }
 

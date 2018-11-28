@@ -11,7 +11,7 @@ import { LogingRoutingModule } from './login-routing.module';
     CommonModule,
     LogingRoutingModule,
     MaterialModule,
-    AuthApiModule,
+    AuthApiModule
   ],
   providers: [LoginService],
   declarations: [LoginComponent]

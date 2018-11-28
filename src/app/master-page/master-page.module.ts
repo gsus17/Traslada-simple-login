@@ -4,6 +4,7 @@ import { MasterPageComponent } from './master-page.component';
 import { MaterialModule } from '../material/material.module';
 import { MasterPageRoutingModule } from './master-page-routing.module';
 import { MessagingModule } from '../messaging/messaging.module';
+import { LoginModule } from '../auth/login/login.module';
 
 @NgModule({
   declarations: [MasterPageComponent],
@@ -11,7 +12,8 @@ import { MessagingModule } from '../messaging/messaging.module';
     MessagingModule,
     CommonModule,
     MasterPageRoutingModule,
-    MaterialModule
+    MaterialModule,
+    LoginModule
   ]
 })
 export class MasterPageModule { }
