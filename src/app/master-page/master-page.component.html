@@ -42,14 +42,14 @@
         <div fxLayout="column"
              class="container"
              fxFlex
-             fxLayoutAlign="space-between center">
-          <button mat-raised-button
+             fxLayoutAlign="center center">
+          <!-- <button mat-raised-button
                   (click)="drawer.toggle()">Open menu</button>
           <button mat-raised-button
                   (click)="left.toggle()">Open right Sidenav</button>
           <button mat-raised-button
-                  (click)="right.toggle()">Open Left Sidenav</button>
-
+                  (click)="right.toggle()">Open Left Sidenav</button> -->
+          <router-outlet></router-outlet>
         </div>
 
       </mat-sidenav-container>

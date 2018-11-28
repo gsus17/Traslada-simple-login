@@ -27,7 +27,7 @@
               "src/styles.css"
             ],
             "scripts": [
-              "./node_modules/localforage/localforage.js"
+              "./node_modules/localforage/dist/localforage.js"
             ]
           },
           "configurations": {

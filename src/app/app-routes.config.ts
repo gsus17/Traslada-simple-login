@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { MasterPageComponent } from './master-page/master-page.component';
 
 export const routes: Routes = [
   {
@@ -7,7 +8,14 @@ export const routes: Routes = [
   },
   {
     path: 'master-page',
-    loadChildren: './master-page/master-page.module#MasterPageModule'
+    // loadChildren: './master-page/master-page.module#MasterPageModule',
+    component: MasterPageComponent,
+    children: [
+      {
+        path: 'tracking',
+        loadChildren: './tracking-map/tracking-map.module#TrackingMapModule'
+      }
+    ]
   },
   {
     path: 'messaging',
