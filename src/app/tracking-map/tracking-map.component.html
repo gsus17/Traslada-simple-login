@@ -9,7 +9,7 @@
                  mode="side"
                  position="start">
       Left Sidenav.
-      <app-messaging></app-messaging>
+      <!-- <app-messaging></app-messaging> -->
     </mat-sidenav>
 
     <mat-sidenav #right
@@ -19,15 +19,19 @@
       Right Sidenav.
     </mat-sidenav>
 
-    <div fxLayout="column"
-         class="container"
-         fxLayoutAlign="center center">
+    <mat-sidenav-content>
+      <div fxLayout="column"
+           class="container"
+           fxLayoutAlign="center center">
+        <div class="container">
+          <div id="map"></div>
+           <button mat-raised-button
+                (click)="left.toggle()">Open left Sidenav</button>
+        <button mat-raised-button
+                (click)="right.toggle()">Open right Sidenav</button>
+        </div>
 
-      <button mat-raised-button
-              (click)="left.toggle()">Open left Sidenav</button>
-      <button mat-raised-button
-              (click)="right.toggle()">Open right Sidenav</button>
-    </div>
-
+      </div>
+    </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

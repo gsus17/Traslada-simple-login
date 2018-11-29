@@ -18,10 +18,6 @@ export const routes: Routes = [
     ]
   },
   {
-    path: 'messaging',
-    loadChildren: './messaging/messaging.module#MessagingModule'
-  },
-  {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
