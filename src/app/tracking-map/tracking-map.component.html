@@ -1,3 +1,33 @@
-<p>
-  tracking-map works!
-</p>
+<div fxFlexFill
+     fxLayout="column">
+  <mat-sidenav-container fxFlex
+                         class="container"
+                         fxFlexLayout="column">
+
+    <mat-sidenav #left
+                 class="panel-content"
+                 mode="side"
+                 position="start">
+      Left Sidenav.
+      <app-messaging></app-messaging>
+    </mat-sidenav>
+
+    <mat-sidenav #right
+                 class="panel-content"
+                 mode="side"
+                 position="end">
+      Right Sidenav.
+    </mat-sidenav>
+
+    <div fxLayout="column"
+         class="container"
+         fxLayoutAlign="center center">
+
+      <button mat-raised-button
+              (click)="left.toggle()">Open left Sidenav</button>
+      <button mat-raised-button
+              (click)="right.toggle()">Open right Sidenav</button>
+    </div>
+
+  </mat-sidenav-container>
+</div>

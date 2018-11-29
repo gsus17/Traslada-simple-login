@@ -1,4 +1,5 @@
-<div class="container">
+<div fxFlexFill
+     fxLayout="column">
   <mat-drawer-container fxFlex
                         fxFlexLayout="column">
 
@@ -7,6 +8,7 @@
                 mode="over">
       <button mat-raised-button
               (click)="logout()">Logout</button>
+
     </mat-drawer>
 
     <mat-drawer-content fxLayout="column">
@@ -21,38 +23,9 @@
         </mat-toolbar>
       </div>
 
-      <mat-sidenav-container class="container"
-                             fxFlexLayout="column">
-
-        <mat-sidenav #right
-                     class="contents"
-                     mode="side"
-                     position="start">
-          Left Sidenav.
-          <app-messaging></app-messaging>
-        </mat-sidenav>
-
-        <mat-sidenav #left
-                     class="contents"
-                     mode="side"
-                     position="end">
-          Right Sidenav.
-        </mat-sidenav>
-
-        <div fxLayout="column"
-             class="container"
-             fxFlex
-             fxLayoutAlign="center center">
-          <!-- <button mat-raised-button
-                  (click)="drawer.toggle()">Open menu</button>
-          <button mat-raised-button
-                  (click)="left.toggle()">Open right Sidenav</button>
-          <button mat-raised-button
-                  (click)="right.toggle()">Open Left Sidenav</button> -->
-          <router-outlet></router-outlet>
-        </div>
-
-      </mat-sidenav-container>
+      <div class="container">
+        <router-outlet></router-outlet>
+      </div>
 
     </mat-drawer-content>
 
