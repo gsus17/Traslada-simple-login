@@ -1,5 +1,4 @@
-<div *ngFor="let item of attendanceList">
-
-  <span>{{item.code}}</span>
-
-</div>
+<cdk-virtual-scroll-viewport itemSize="20"
+                             class="example-viewport">
+  <div *cdkVirtualFor="let item of attendanceList">{{item.code}}</div>
+</cdk-virtual-scroll-viewport>

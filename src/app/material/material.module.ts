@@ -10,6 +10,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [],
@@ -25,7 +26,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatProgressBarModule,
     MatDialogModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    ScrollDispatchModule
   ],
   exports: [
     MatCardModule,
@@ -39,7 +41,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatProgressBarModule,
     MatDialogModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    ScrollDispatchModule
   ]
 })
 export class MaterialModule { }
