@@ -34,12 +34,10 @@ export class TrackingMapComponent implements OnInit {
   private listenMoustrapEvents() {
 
     Mousetrap.bind('a', () => {
-      console.log('Funfiona');
       this.openAssistantSidebar = !this.openAssistantSidebar;
     }, 'keyup');
 
     Mousetrap.bind('m', () => {
-      console.log('Funfiona');
       this.openMessageSidebar = !this.openMessageSidebar;
     }, 'keyup');
   }
