@@ -27,7 +27,8 @@
               "src/styles.css"
             ],
             "scripts": [
-              "./node_modules/localforage/dist/localforage.js"
+              "./node_modules/localforage/dist/localforage.js",
+              "./node_modules/mousetrap/mousetrap.min.js"
             ]
           },
           "configurations": {
