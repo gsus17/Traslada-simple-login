@@ -24,8 +24,57 @@ export class TrackingMapComponent implements OnInit {
 
   ngOnInit() {
     const windows: any = <any>window;
-    const map = new windows.google.maps.Map(document.getElementById('map'), { zoom: 4, center: { lat: -25.344, lng: 131.036 } });
+    const map = new windows.google.maps.Map(document.getElementById('map'), this.getMapConfig());
     this.listenMoustrapEvents();
+  }
+
+  private getMapConfig() {
+    return {
+      zoom: 4,
+      styles: this.getMapStyle(),
+      center: this.getDefaultCoords(),
+    };
+  }
+
+  /**
+   * Devuelve la configuracion de los estilos del mapa.
+   */
+  private getMapStyle(): Object[] {
+    const mapStyle: Object[] = [
+      {
+      },
+      {
+        featureType: 'transit.station.airport',
+        stylers: [
+          {
+            visibility: 'on'
+          }]
+      },
+      // Https://developers.google.com/maps/documentation/javascript/styling?hl=es-419
+      {
+        featureType: 'poi',
+        stylers: [
+          {
+            visibility: 'off'
+          }
+        ]
+      },
+      {
+        featureType: 'poi.park',
+        stylers: [
+          {
+            visibility: 'on'
+          }
+        ]
+      }
+    ];
+
+    return mapStyle;
+  }
+
+  private getDefaultCoords(): any {
+    const ret: any = { lat: -34.595398, lng: -58.383452 };
+    return ret;
   }
 
   /**
