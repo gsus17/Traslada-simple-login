@@ -6,6 +6,7 @@ import { TrackingMapService } from './tracking-map.service';
 import { MaterialModule } from '../material/material.module';
 import { MessagingModule } from './messaging/messaging.module';
 import { DriverAttendanceModule } from './driver-attendance/driver-attendance.module';
+import { SuppliersApiModule } from 'src/api/suppliers/suppliers.module';
 
 @NgModule({
   declarations: [TrackingMapComponent],
@@ -14,7 +15,8 @@ import { DriverAttendanceModule } from './driver-attendance/driver-attendance.mo
     DriverAttendanceModule,
     CommonModule,
     TrackingMapRoutingModule,
-    MaterialModule
+    MaterialModule,
+    SuppliersApiModule
   ],
   providers: [
     TrackingMapService
