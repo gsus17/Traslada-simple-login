@@ -4,7 +4,7 @@ import { MasterPageComponent } from './master-page/master-page.component';
 export const routes: Routes = [
   {
     path: 'login',
-    loadChildren: './auth/login/login.module#LoginModule'
+    loadChildren: () => import('./auth/login/login.module').then(m => m.LoginModule)
   },
   {
     path: 'master-page',
@@ -13,7 +13,7 @@ export const routes: Routes = [
     children: [
       {
         path: 'tracking',
-        loadChildren: './tracking-map/tracking-map.module#TrackingMapModule'
+        loadChildren: () => import('./tracking-map/tracking-map.module').then(m => m.TrackingMapModule)
       }
     ]
   },

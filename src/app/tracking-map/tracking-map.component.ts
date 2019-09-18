@@ -6,10 +6,10 @@ import { TrackingMapService } from './tracking-map.service';
 @Component({
   selector: 'app-tracking-map',
   templateUrl: './tracking-map.component.html',
-  styleUrls: ['./tracking-map.component.sass']
+  styleUrls: ['./tracking-map.component.scss']
 })
 export class TrackingMapComponent implements OnInit {
-  @ViewChild(MatSidenavContainer) sidenavContainer: MatSidenavContainer;
+  @ViewChild(MatSidenavContainer, null) sidenavContainer: MatSidenavContainer;
 
   /**
    * Toggle assistant sidebar flag.

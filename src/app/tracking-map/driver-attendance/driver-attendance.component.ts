@@ -4,7 +4,7 @@ import { DriverAttendanceService } from './driver-attendance.service';
 @Component({
   selector: 'app-driver-attendance',
   templateUrl: './driver-attendance.component.html',
-  styleUrls: ['./driver-attendance.component.sass']
+  styleUrls: ['./driver-attendance.component.scss']
 })
 export class DriverAttendanceComponent implements OnInit {
 
