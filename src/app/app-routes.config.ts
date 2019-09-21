@@ -8,14 +8,7 @@ export const routes: Routes = [
   },
   {
     path: 'master-page',
-    // loadChildren: './master-page/master-page.module#MasterPageModule',
-    component: MasterPageComponent,
-    children: [
-      {
-        path: 'tracking',
-        loadChildren: () => import('./tracking-map/tracking-map.module').then(m => m.TrackingMapModule)
-      }
-    ]
+    loadChildren: () => import('./master-page/master-page.module').then(m => m.MasterPageModule)
   },
   {
     path: '',

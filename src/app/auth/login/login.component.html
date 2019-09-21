@@ -1,4 +1,4 @@
-<div fxFlexFill
+<!-- <div fxFlexFill
      class="container"
      fxLayout="column"
      fxLayoutAlign="center center">
@@ -66,4 +66,95 @@
     <span class="version-app">Version 0.0.1</span>
   </div>
 
+</div> -->
+
+
+<div fxFlexFill
+     fxLayout="column"
+     class="containers"
+     fxLayoutAlign="center center">
+
+  <div fxLayout="column"
+       fxLayoutAlign="center center">
+    <div fxFlex
+         fxLayout="row"
+         fxLayoutAlign="center center">
+      <span class="mat-title"
+            i18n>{{'LOGIN.TITLE' | translate}}</span>
+    </div>
+  </div>
+
+  <mat-card class="login-content"
+            fxLayout="column"
+            fxLayoutAlign="center flex">
+    <div class="progress-bar-container">
+      <mat-progress-bar mode="indeterminate"
+                        *ngIf="progressLinear"></mat-progress-bar>
+    </div>
+
+    <mat-card-subtitle>
+      <span i18n>{{'LOGIN.FORM_TITLE' | translate}}</span>
+    </mat-card-subtitle>
+
+    <form class="example-form"
+          [formGroup]="authForm"
+          fxLayout="column">
+      <mat-form-field>
+        <mat-label i18n>{{'LOGIN.FORM_USER' | translate}}</mat-label>
+        <input #user
+               matInput
+               formControlName="user"
+               type="text"
+               placeholder="{{'LOGIN.FORM_USER' | translate}}"
+               required>
+        <mat-error *ngIf="!user.valid"
+                   i18n>{{'LOGIN.FORM_USER_ERROR' | translate}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input #password
+               matInput
+               type="password"
+               formControlName="password"
+               placeholder="{{'LOGIN.FORM_PASSWORD' | translate}}"
+               required>
+        <mat-error *ngIf="!password.valid"
+                   i18n>{{'LOGIN.FORM_PASSWORD_ERROR' | translate}}</mat-error>
+      </mat-form-field>
+
+      <div class="selection-section"
+           fxLayout="column">
+
+        <div fxLayout="row"
+             fxLayout.xs="column"
+             fxFlex
+             fxLayoutAlign="space-between center">
+          <mat-checkbox class="fxMargin"
+                        i18n>{{'LOGIN.FORM_KEEP_SESSION' | translate}}</mat-checkbox>
+          <button mat-raised-button
+                  (click)="login()"
+                  [disabled]="!authForm.valid"
+                  color="primary"
+                  i18n>{{'LOGIN.FORM_BUTTON' | translate}}</button>
+        </div>
+
+        <div fxLayout="row"
+             fxFlex
+             fxLayoutAlign="end center"
+             fxLayoutAlign.xs="center center"
+             class="password-recovery-container">
+          <button mat-button
+                  i18n>{{'LOGIN.FORM_RECOVERY_BUTTON' | translate}}</button>
+        </div>
+      </div>
+
+    </form>
+  </mat-card>
+
+  <div class="fxMargin">
+    <span class="version-app"
+          i18n>Version 0.0.1</span>
+  </div>
+
 </div>
+

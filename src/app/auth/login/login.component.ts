@@ -12,11 +12,6 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   /**
-   * User credentials.
-   */
-  public credentials: Credentials;
-
-  /**
    * Validation Form control.
    */
   public authForm = new FormGroup(
@@ -38,20 +33,16 @@ export class LoginComponent implements OnInit {
     private loginService: LoginService,
     private router: Router) { }
 
-  ngOnInit() {
-    this.credentials = {
-      user: '',
-      password: ''
-    };
-  }
+  ngOnInit() {}
 
   /**
    * Auth process.
    */
   public login() {
-    console.log(`${LoginComponent.name}::login credentials %o`, this.credentials);
+    console.log(`${LoginComponent.name}::login`);
     this.progressLinear = true;
-    this.loginService.login(this.credentials)
+    const credentials = this.authForm.value;
+    this.loginService.login(credentials)
       .then(() => {
         console.log(`${LoginComponent.name}::login (then)`);
         this.redirect();
@@ -68,7 +59,6 @@ export class LoginComponent implements OnInit {
    * Redirect to main view.
    */
   public redirect() {
-    this.router.navigate(['master-page']);
+    this.router.navigate(['master-page/tracking']);
   }
-
 }

@@ -11,38 +11,28 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
+const MODULES = [
+  MatCardModule,
+  MatInputModule,
+  MatFormFieldModule,
+  MatButtonModule,
+  FlexLayoutModule,
+  FormsModule,
+  MatSidenavModule,
+  ReactiveFormsModule,
+  MatProgressBarModule,
+  MatDialogModule,
+  MatToolbarModule,
+  MatIconModule,
+  ScrollDispatchModule,
+  MatCheckboxModule
+];
 
 @NgModule({
   declarations: [],
-  imports: [
-    MatCardModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    FlexLayoutModule,
-    FormsModule,
-    MatSidenavModule,
-    ReactiveFormsModule,
-    MatProgressBarModule,
-    MatDialogModule,
-    MatToolbarModule,
-    MatIconModule,
-    ScrollDispatchModule
-  ],
-  exports: [
-    MatCardModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    FlexLayoutModule,
-    FormsModule,
-    MatSidenavModule,
-    ReactiveFormsModule,
-    MatProgressBarModule,
-    MatDialogModule,
-    MatToolbarModule,
-    MatIconModule,
-    ScrollDispatchModule
-  ]
+  imports: MODULES,
+  exports: MODULES
 })
 export class MaterialModule { }

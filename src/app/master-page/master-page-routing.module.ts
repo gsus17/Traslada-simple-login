@@ -5,7 +5,13 @@ import { MasterPageComponent } from './master-page.component';
 const routes: Routes = [
   {
     path: '',
-    component: MasterPageComponent
+    component: MasterPageComponent,
+    children: [
+      {
+        path: 'tracking',
+        loadChildren: () => import('./tracking-map/tracking-map.module').then(m => m.TrackingMapModule)
+      }
+    ]
   }
 ];
 

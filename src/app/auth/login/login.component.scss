@@ -5,3 +5,26 @@
 .version-app { color: grey;  font-size: 9px;  margin: 16px 0;}
 
 .progress-bar-container {  padding-bottom: 8px; }
+
+.login-content { height: auto !important;}
+
+.fxMargin { margin: 16px;}
+
+.version-app { color: grey;  font-size: 9px;  margin: 16px 0;}
+
+.progress-bar-container {  padding-bottom: 8px; }
+
+.selection-section { padding-top: 40px;}
+
+.principal-label {
+  margin-bottom: 0 !important;
+}
+
+.password-recovery-container{
+  margin: 16px 0 0 0;
+}
+
+// Mediaquery para formulario de una sola columna en xs.
+@media (min-width: 599px) {
+  .login-content { min-width: 500px;  height: auto !important;}
+}
