@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import * as Mousetrap from 'Mousetrap';
 import { MatSidenavContainer } from '@angular/material/sidenav';
 import { TrackingMapService } from './tracking-map.service';
+import { mapStyle } from './map-style-config';
+
 
 @Component({
   selector: 'app-tracking-map',
@@ -43,9 +45,10 @@ export class TrackingMapComponent implements OnInit {
 
   private getMapConfig() {
     return {
-      zoom: 4,
+      zoom: 16,
       styles: this.getMapStyle(),
       center: this.getDefaultCoords(),
+      control: {}
     };
   }
 
@@ -53,35 +56,6 @@ export class TrackingMapComponent implements OnInit {
    * Devuelve la configuracion de los estilos del mapa.
    */
   private getMapStyle(): Object[] {
-    const mapStyle: Object[] = [
-      {
-      },
-      {
-        featureType: 'transit.station.airport',
-        stylers: [
-          {
-            visibility: 'on'
-          }]
-      },
-      // Https://developers.google.com/maps/documentation/javascript/styling?hl=es-419
-      {
-        featureType: 'poi',
-        stylers: [
-          {
-            visibility: 'off'
-          }
-        ]
-      },
-      {
-        featureType: 'poi.park',
-        stylers: [
-          {
-            visibility: 'on'
-          }
-        ]
-      }
-    ];
-
     return mapStyle;
   }
 
