@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { LoginRequest } from '../entities/login-request.entity';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class AuthApiService {
   /**
    * Request an OpenId Authentication.
    */
-  public login(loginRequest: LoginRequest): Promise<any> {
+  public login(loginRequest: LoginRequest): Observable<any> {
     console.log(`${AuthApiService.name}::login credentials %o`, loginRequest);
     const url = 'https://auth.apolloteam.com.ar/connect/token';
 
@@ -28,8 +29,7 @@ export class AuthApiService {
     body.set('scopes', null);
     body.set('username', loginRequest.username);
 
-    return this.httpClient.post(url, body.toString(), httpOptions).toPromise();
-
+    return this.httpClient.post(url, body.toString(), httpOptions);
   }
 
 }

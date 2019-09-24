@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { LoginService } from '../auth/login/login.service';
+import { Store } from '@ngxs/store';
+import { Logout } from '../auth/ngxs/auth.actions';
 
 @Component({
   selector: 'app-master-page',
@@ -9,9 +9,7 @@ import { LoginService } from '../auth/login/login.service';
 })
 export class MasterPageComponent implements OnInit {
 
-  constructor(
-    private loginService: LoginService,
-    private router: Router) { }
+  constructor(private store: Store) { }
 
   ngOnInit() {
   }
@@ -21,8 +19,6 @@ export class MasterPageComponent implements OnInit {
    */
   public logout() {
     console.log(`${MasterPageComponent.name}::logout`);
-    this.loginService.logout();
-    this.router.navigate(['login']);
+    this.store.dispatch(new Logout());
   }
-
 }

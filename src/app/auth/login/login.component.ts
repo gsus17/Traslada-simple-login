@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Credentials } from './login.interfaces';
-import { LoginService } from './login.service';
-import { Router } from '@angular/router';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { Store, Select } from '@ngxs/store';
+import { Login } from '../ngxs/auth.actions';
+import { LoginRequest } from 'src/api/entities/login-request.entity';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -21,44 +22,30 @@ export class LoginComponent implements OnInit {
     }
   );
 
-  /**
-   * Progress linear to loading process.
-   */
-  public progressLinear: boolean = false;
-
   // Convenience getter for easy access to form fields.
   get form() { return this.authForm.controls; }
 
-  constructor(
-    private loginService: LoginService,
-    private router: Router) { }
+  @Select(state => state.shared.progressLinear) progressLinear$: Observable<boolean>;
 
-  ngOnInit() {}
+  constructor(private store: Store) { }
+
+  ngOnInit() { }
 
   /**
    * Auth process.
    */
   public login() {
     console.log(`${LoginComponent.name}::login`);
-    this.progressLinear = true;
     const credentials = this.authForm.value;
-    this.loginService.login(credentials)
-      .then(() => {
-        console.log(`${LoginComponent.name}::login (then)`);
-        this.redirect();
-      })
-      .catch((error) => {
-        console.log(`${LoginComponent.name}::login (catch) %o`, error);
-      })
-      .finally(() => {
-        this.progressLinear = false;
-      });
-  }
 
-  /**
-   * Redirect to main view.
-   */
-  public redirect() {
-    this.router.navigate(['master-page/tracking']);
+    const loginRequest: LoginRequest = {
+      username: credentials.user,
+      password: credentials.password,
+      client_id: 'traslada.operators',
+      grant_type: 'password',
+      scopes: 'null'
+    };
+
+    this.store.dispatch(new Login(loginRequest));
   }
 }
