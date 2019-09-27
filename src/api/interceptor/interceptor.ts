@@ -36,7 +36,7 @@ export class Interceptor implements HttpInterceptor {
     const headers = this.defaultApplicationHeaders;
 
     // set API-Token if available
-    if (authToken !== null) {
+    if (typeof authToken === 'string' && authToken.length > 0) {
       const authHeaderTpl = `Bearer ${authToken}`;
       headers['Authorization'] = authHeaderTpl;
     }

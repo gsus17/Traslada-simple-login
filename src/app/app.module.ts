@@ -12,6 +12,7 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { AppI18nService } from './app-i18n.service';
 import { SharedState } from './shared-ngxs/shared.state';
 import { AuthState } from './auth/ngxs/auth.state';
+import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -34,6 +35,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
+    NgxsRouterPluginModule.forRoot(),
     NgxsModule.forRoot([AuthState, SharedState]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),

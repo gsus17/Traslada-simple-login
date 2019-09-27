@@ -1,6 +1,6 @@
 import { State, Action, StateContext } from '@ngxs/store';
 import { Router } from '@angular/router';
-import { EnabledProgressLinear, DisabledProgressLinear, Redirection } from './shared.actions';
+import { EnabledProgressLinear, DisabledProgressLinear } from './shared.actions';
 
 
 export interface SharedModel {
@@ -17,7 +17,7 @@ export interface SharedModel {
 })
 export class SharedState {
 
-    constructor(private router: Router) { }
+    constructor() { }
 
     @Action(EnabledProgressLinear)
     enabledProgressLinear({ setState, getState }: StateContext<SharedModel>, payload) {
@@ -37,18 +37,5 @@ export class SharedState {
             ...state,
             progressLinear: false
         });
-    }
-
-    @Action(Redirection)
-    redirection({ setState, getState }: StateContext<SharedModel>, payload) {
-        const state = getState();
-
-        console.log('prueba', payload);
-        setState({
-            ...state,
-            route: payload.path
-        });
-
-        this.router.navigate([payload.path]);
     }
 }
