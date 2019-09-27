@@ -5,6 +5,7 @@ import { AuthApiModule } from 'src/api/auth/auth-api.module';
 import { MaterialModule } from 'src/app/material/material.module';
 import { LogingRoutingModule } from './login-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import { TranslateModule } from '@ngx-translate/core';
     LogingRoutingModule,
     MaterialModule,
     TranslateModule,
-    AuthApiModule
+    AuthApiModule,
+    NgxsFormPluginModule.forRoot()
   ],
   providers: [],
   declarations: [LoginComponent]

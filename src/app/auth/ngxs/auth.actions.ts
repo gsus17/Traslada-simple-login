@@ -1,11 +1,10 @@
-import { LoginRequest } from 'src/api/entities/login-request.entity';
 import { JsonWebToken } from 'src/api/entities/json-web-token.entity';
 
 const FEATURE_KEY = '[Auth]';
 
 export class Login {
     static readonly type = `${FEATURE_KEY} login`;
-    constructor(public loginRequest: LoginRequest) { }
+    constructor() { }
 }
 
 export class Logout {

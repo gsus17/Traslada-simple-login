@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { Store, Select } from '@ngxs/store';
 import { Login } from '../ngxs/auth.actions';
-import { LoginRequest } from 'src/api/entities/login-request.entity';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -36,16 +35,6 @@ export class LoginComponent implements OnInit {
    */
   public login() {
     console.log(`${LoginComponent.name}::login`);
-    const credentials = this.authForm.value;
-
-    const loginRequest: LoginRequest = {
-      username: credentials.user,
-      password: credentials.password,
-      client_id: 'traslada.operators',
-      grant_type: 'password',
-      scopes: 'null'
-    };
-
-    this.store.dispatch(new Login(loginRequest));
+    this.store.dispatch(new Login());
   }
 }

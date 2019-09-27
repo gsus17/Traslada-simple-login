@@ -4,11 +4,14 @@ import { Login, LoginSuccess, LoginError, SaveTokenLocalStorage, Logout } from '
 import { AuthApiService } from 'src/api/auth/auth-api.service';
 import { EnabledProgressLinear, DisabledProgressLinear } from 'src/app/shared-ngxs/shared.actions';
 import { Navigate } from '@ngxs/router-plugin';
+import { LoginRequest } from 'src/api/entities/login-request.entity';
+import { UpdateFormValue } from '@ngxs/form-plugin';
 
 export interface AuthStateModel {
   userLogged: any;
   loginError: any;
   token: string;
+  authForm: any;
 }
 
 @State<AuthStateModel>({
@@ -16,7 +19,13 @@ export interface AuthStateModel {
   defaults: {
     userLogged: null,
     loginError: null,
-    token: null
+    token: null,
+    authForm: {
+      model: undefined,
+      dirty: false,
+      status: '',
+      errors: {}
+    }
   }
 })
 export class AuthState {
@@ -24,9 +33,19 @@ export class AuthState {
   constructor(private authApiService: AuthApiService) { }
 
   @Action(Login)
-  login({ dispatch }: StateContext<AuthStateModel>, payload) {
+  login({ dispatch, getState }: StateContext<AuthStateModel>) {
+    const state = getState();
     dispatch(new EnabledProgressLinear());
-    return this.authApiService.login(payload.loginRequest)
+
+    const loginRequest: LoginRequest = {
+      username: state.authForm.model.user,
+      password: state.authForm.model.password,
+      client_id: 'traslada.operators',
+      grant_type: 'password',
+      scopes: 'null'
+    };
+
+    return this.authApiService.login(loginRequest)
       .pipe(
         tap((response) => dispatch(new LoginSuccess(response))),
         catchError((error) => dispatch(new LoginError(error))));
@@ -38,7 +57,7 @@ export class AuthState {
       ...getState(),
       token: null
     });
-    dispatch(new Navigate(['/login']));
+    dispatch([new Navigate(['/login']), new UpdateFormValue({ value: { user: '', password: '' }, path: 'auth.authForm' })]);
     localStorage.removeItem('authToken');
   }
 
