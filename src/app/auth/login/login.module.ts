@@ -6,6 +6,8 @@ import { MaterialModule } from 'src/app/material/material.module';
 import { LogingRoutingModule } from './login-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
+import { AuthState } from '../store/auth.state';
+import { NgxsModule } from '@ngxs/store';
 
 @NgModule({
   imports: [
@@ -14,7 +16,8 @@ import { NgxsFormPluginModule } from '@ngxs/form-plugin';
     MaterialModule,
     TranslateModule,
     AuthApiModule,
-    NgxsFormPluginModule.forRoot()
+    NgxsFormPluginModule.forRoot(),
+    NgxsModule.forFeature([AuthState]),
   ],
   providers: [],
   declarations: [LoginComponent]

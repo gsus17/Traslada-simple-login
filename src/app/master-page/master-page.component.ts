@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { Logout } from '../auth/ngxs/auth.actions';
+import { Logout } from '../auth/store/auth.actions';
 
 @Component({
   selector: 'app-master-page',

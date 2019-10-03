@@ -15,7 +15,7 @@ export class AuthApiService {
    */
   public login(loginRequest: LoginRequest): Observable<any> {
     console.log(`${AuthApiService.name}::login credentials %o`, loginRequest);
-    const url = 'https://auth.apolloteam.com.ar/connect/token';
+    const url = 'https://auth.zwitcher.com/connect/token';
 
     const httpOptions = {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8')

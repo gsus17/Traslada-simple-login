@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { Store, Select } from '@ngxs/store';
-import { Login } from '../ngxs/auth.actions';
+import { Login } from '../store/auth.actions';
 import { Observable } from 'rxjs';
 
 @Component({

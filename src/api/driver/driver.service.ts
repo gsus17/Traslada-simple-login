@@ -15,7 +15,7 @@ export class DriverApiService {
   public getOperativeAttendance$(): Observable<any[]> {
     console.log(`${DriverApiService.name}::getOperativeAttendance`);
 
-    const url = 'https://suppliers.apolloteam.com.ar/drivers/operativeAttendance';
+    const url = 'https://suppliers.zwitcher.com/drivers/operativeAttendance';
 
     return this.httpClient.get<any[]>(url, { params: { 'date': '2018-08-15' } });
   }

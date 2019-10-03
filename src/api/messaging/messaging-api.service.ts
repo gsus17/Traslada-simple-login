@@ -17,7 +17,7 @@ export class MessaginApigService {
   public getChatsPreviews$(room: string): Observable<ChatPreview[]> {
     console.log(`${MessaginApigService.name}::getChatsPreviews room %o`, room);
 
-    const url = 'https://suppliers.apolloteam.com.ar/chats/previews';
+    const url = 'https://suppliers.zwitcher.com/chats/previews';
 
     const params = new HttpParams();
     params.set('room', room);

@@ -70,6 +70,7 @@ export class AuthState {
       userLogged: payload.response
     });
     dispatch([
+      new SaveTokenLocalStorage(payload.response.access_token),
       new DisabledProgressLinear(),
       new Navigate(['master-page/tracking'])
     ]);
@@ -79,7 +80,7 @@ export class AuthState {
   saveTokenLocalStorage({ getState, setState }: StateContext<AuthStateModel>, payload) {
     const state = getState();
 
-    const token = payload.data.access_token;
+    const token = payload.data;
     localStorage.setItem('authToken', token);
 
     setState({

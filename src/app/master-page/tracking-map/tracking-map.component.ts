@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as Mousetrap from 'Mousetrap';
 import { MatSidenavContainer } from '@angular/material/sidenav';
-import { TrackingMapService } from './tracking-map.service';
 import { mapStyle } from './map-style-config';
+import { Store } from '@ngxs/store';
+import { TrackingGetBasesAction, TrackingGetPositionsAction } from './store/tracking-map.actions';
+import { TrackingState } from './store/tracking-map.state';
 
 
 @Component({
@@ -33,7 +35,7 @@ export class TrackingMapComponent implements OnInit {
    */
   private windows: any;
 
-  constructor(private trackingMapService: TrackingMapService) {
+  constructor(private store: Store) {
   }
 
   ngOnInit() {
@@ -41,24 +43,19 @@ export class TrackingMapComponent implements OnInit {
     this.map = new this.windows.google.maps.Map(document.getElementById('map'), this.getMapConfig());
     this.loadBases();
     this.listenMoustrapEvents();
+
+    // // Inicializa el proceso de actualizacion de datos en el mapa.
+    this.getTrackingPositionsDataByFilter();
   }
 
   private getMapConfig() {
     return {
       zoom: 16,
-      styles: this.getMapStyle(),
+      styles: mapStyle,
       center: this.getDefaultCoords(),
       control: {}
     };
   }
-
-  /**
-   * Devuelve la configuracion de los estilos del mapa.
-   */
-  private getMapStyle(): Object[] {
-    return mapStyle;
-  }
-
 
   /**
    * Realiza la peticion de bases.
@@ -67,13 +64,11 @@ export class TrackingMapComponent implements OnInit {
     const methodName: string = `${TrackingMapComponent.name}::loadBases`;
     console.log(`${methodName}`);
 
-    this.trackingMapService.getBases()
-      .then((baseList: any[]) => {
-
-        // Dibuja las bases en el mapa.
-        this.renderBasesOnMap(baseList);
-      })
-      .catch(() => {
+    this.store.dispatch(new TrackingGetBasesAction())
+      .toPromise()
+      .then(() => {
+        const bases: any[] = this.store.selectSnapshot(TrackingState.basesList);
+        this.renderBasesOnMap(bases);
       });
   }
 
@@ -116,13 +111,14 @@ export class TrackingMapComponent implements OnInit {
    * Init listener of mousetrap.
    */
   private listenMoustrapEvents() {
+    Mousetrap
+      .bind('a', () => { this.openAssistantSidebar = !this.openAssistantSidebar; }, 'keyup');
 
-    Mousetrap.bind('a', () => {
-      this.openAssistantSidebar = !this.openAssistantSidebar;
-    }, 'keyup');
+    Mousetrap
+      .bind('m', () => { this.openMessageSidebar = !this.openMessageSidebar; }, 'keyup');
+  }
 
-    Mousetrap.bind('m', () => {
-      this.openMessageSidebar = !this.openMessageSidebar;
-    }, 'keyup');
+  private getTrackingPositionsDataByFilter(): any {
+    this.store.dispatch(new TrackingGetPositionsAction());
   }
 }
