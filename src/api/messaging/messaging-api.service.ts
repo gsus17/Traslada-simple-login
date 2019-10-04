@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ChatPreview } from '../entities/chat-preview.entity';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class MessaginApigService {
   public getChatsPreviews$(room: string): Observable<ChatPreview[]> {
     console.log(`${MessaginApigService.name}::getChatsPreviews room %o`, room);
 
-    const url = 'https://suppliers.zwitcher.com/chats/previews';
+    const url = `https://suppliers.${environment.api_domain}/chats/previews`;
 
     const params = new HttpParams();
     params.set('room', room);

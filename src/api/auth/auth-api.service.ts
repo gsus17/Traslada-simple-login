@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { LoginRequest } from '../entities/login-request.entity';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class AuthApiService {
    */
   public login(loginRequest: LoginRequest): Observable<any> {
     console.log(`${AuthApiService.name}::login credentials %o`, loginRequest);
-    const url = 'https://auth.zwitcher.com/connect/token';
+    const url = `https://auth.${environment.api_domain}/connect/token`;
 
     const httpOptions = {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8')
