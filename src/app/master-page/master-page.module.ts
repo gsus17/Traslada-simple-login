@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MasterPageComponent } from './master-page.component';
-import { MaterialModule } from '../material/material.module';
+import { AngularMaterialModule } from '../material/material.module';
 import { MasterPageRoutingModule } from './master-page-routing.module';
 import { LoginModule } from '../auth/login/login.module';
 
@@ -10,7 +10,7 @@ import { LoginModule } from '../auth/login/login.module';
   imports: [
     CommonModule,
     MasterPageRoutingModule,
-    MaterialModule,
+    AngularMaterialModule,
     LoginModule
   ]
 })

@@ -1,0 +1,18 @@
+<h1 mat-dialog-title
+    fxLayout="row"
+    fxLayoutAlign="start center">
+  <mat-icon class="error-color">error_outline</mat-icon>&nbsp; {{ data.title }}
+</h1>
+<div mat-dialog-content
+     fxLayout="column">
+  <p>{{ data.message }}</p>
+
+</div>
+<div mat-dialog-actions
+     fxLayoutAlign="end">
+  <button mat-button
+          [mat-dialog-close]="true"
+          cdkFocusInitial
+          (click)="close()"
+          color="accent">Aceptar</button>
+</div>

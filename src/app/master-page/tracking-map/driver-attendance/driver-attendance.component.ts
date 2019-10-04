@@ -17,11 +17,11 @@ export class DriverAttendanceComponent implements OnInit {
 
   ngOnInit() {
 
-    this.driverAttendanceService.getOperativeAttendance$()
-      .subscribe((data) => {
-        console.log(`${DriverAttendanceComponent.name} response: %o`, data);
-        this.attendanceList = [...data];
-      });
+    // this.driverAttendanceService.getOperativeAttendance$()
+    //   .subscribe((data) => {
+    //     console.log(`${DriverAttendanceComponent.name} response: %o`, data);
+    //     this.attendanceList = [...data];
+    //   });
   }
 
 }

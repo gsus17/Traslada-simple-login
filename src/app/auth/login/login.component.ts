@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { Store, Select } from '@ngxs/store';
-import { Login } from '../store/auth.actions';
+import { LoginAction } from '../store/auth.actions';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -35,6 +35,6 @@ export class LoginComponent implements OnInit {
    */
   public login() {
     console.log(`${LoginComponent.name}::login`);
-    this.store.dispatch(new Login());
+    this.store.dispatch(new LoginAction());
   }
 }

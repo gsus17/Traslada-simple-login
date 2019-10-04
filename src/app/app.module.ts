@@ -12,6 +12,7 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { AppI18nService } from './app-i18n.service';
 import { SharedState } from './shared-ngxs/shared.state';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
+import { ErrorHandlerModule } from './error-handler/error-handler.module';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -38,6 +39,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgxsModule.forRoot([SharedState]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
+    ErrorHandlerModule
   ],
   providers: [AppI18nService],
   bootstrap: [AppComponent]

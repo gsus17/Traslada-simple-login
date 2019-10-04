@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login.component';
 import { AuthApiModule } from 'src/api/auth/auth-api.module';
-import { MaterialModule } from 'src/app/material/material.module';
+import { AngularMaterialModule } from 'src/app/material/material.module';
 import { LogingRoutingModule } from './login-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
@@ -13,7 +13,7 @@ import { NgxsModule } from '@ngxs/store';
   imports: [
     CommonModule,
     LogingRoutingModule,
-    MaterialModule,
+    AngularMaterialModule,
     TranslateModule,
     AuthApiModule,
     NgxsFormPluginModule.forRoot(),

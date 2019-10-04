@@ -2,7 +2,7 @@ import { JsonWebToken } from 'src/api/entities/json-web-token.entity';
 
 const FEATURE_KEY = '[Auth]';
 
-export class Login {
+export class LoginAction {
     static readonly type = `${FEATURE_KEY} login`;
     constructor() { }
 }
