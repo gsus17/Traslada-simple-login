@@ -12,7 +12,7 @@ export class Logout {
     constructor() { }
 }
 
-export class LoginSuccess {
+export class AuthLoginSuccessAction {
     static readonly type = `${FEATURE_KEY} login success`;
     constructor(public response) { }
 }
@@ -22,7 +22,7 @@ export class SaveTokenLocalStorage {
     constructor(public data: JsonWebToken) { }
 }
 
-export class LoginError {
+export class AuthLoginErrorAction {
     static readonly type = `${FEATURE_KEY} login error`;
     constructor(public error) { }
 }

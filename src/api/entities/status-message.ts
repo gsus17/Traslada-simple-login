@@ -1,3 +1,5 @@
+import { ErrorMessage } from './error-message.entity';
+
 /** Contiene un mensaje de estado para responder a una petición que produjo un error. */
 export interface StatusMessage {
 
@@ -29,5 +31,7 @@ export interface StatusMessage {
 
   /** Código único de error generado en el cliente. */
   uiErrorUniqueId?: string;
+
+  uiErrorMessage?: ErrorMessage;
 }
 

@@ -1,6 +1,6 @@
 import { State, Action, StateContext } from '@ngxs/store';
 import { tap, catchError } from 'rxjs/operators';
-import { LoginAction, LoginSuccess, LoginError, SaveTokenLocalStorage, Logout } from './auth.actions';
+import { LoginAction, AuthLoginSuccessAction, AuthLoginErrorAction, SaveTokenLocalStorage, Logout } from './auth.actions';
 import { AuthApiService } from 'src/api/auth/auth-api.service';
 import { EnabledProgressLinear, DisabledProgressLinear } from 'src/app/shared-ngxs/shared.actions';
 import { Navigate } from '@ngxs/router-plugin';
@@ -11,6 +11,7 @@ import { ErrorMessage } from 'src/api/entities/error-message.entity';
 import { TranslateService } from '@ngx-translate/core';
 import { throwError, of } from 'rxjs';
 import { ErrorHelperService } from 'src/app/error-handler/error-helper.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 export interface AuthStateModel {
   userLogged: any;
@@ -55,8 +56,9 @@ export class AuthState {
 
     return this.authApiService.login(loginRequest)
       .pipe(
-        tap((response) => dispatch(new LoginSuccess(response))),
-        catchError((error) => of(dispatch(new LoginError(error)))));
+        tap((response) => dispatch(new AuthLoginSuccessAction(response))),
+        catchError((err) => of(dispatch(new AuthLoginErrorAction(err))))
+      );
   }
 
   @Action(Logout)
@@ -69,7 +71,7 @@ export class AuthState {
     localStorage.removeItem('authToken');
   }
 
-  @Action(LoginSuccess)
+  @Action(AuthLoginSuccessAction)
   loginSuccess({ getState, setState, dispatch }: StateContext<AuthStateModel>, payload) {
     const state = getState();
 
@@ -83,29 +85,26 @@ export class AuthState {
       new Navigate(['master-page/tracking'])
     ]);
   }
-  @Action(LoginError)
-  loginError({ getState, setState, dispatch }: StateContext<AuthStateModel>, { error }) {
+
+  @Action(AuthLoginErrorAction)
+  authLoginErrorAction({ dispatch }: StateContext<AuthStateModel>, { error }) {
     dispatch(new DisabledProgressLinear());
     let messageKey: string = null;
-    let titleKey: string = null;
-    const objectType: string = 'object';
 
-    if (objectType === typeof error) {
+    if (error instanceof HttpErrorResponse) {
       if (error.error.errorCode === ErrorCodes.ErrAuthInvalidCredentials) {
-        messageKey = 'AUTH.CREDENTIALS_INVALID';
-        titleKey = 'AUTH.ERROR';
-      } else if (error.errorCode === ErrorCodes.ErrAuthNoLoginPrivilege) {
-        messageKey = 'AUTH.CREDENTIALS_INVALID';
-        titleKey = 'AUTH.ERROR';
+        messageKey = 'LOGIN.ERRORS.CREDENTIALS';
+      } else if (error.error.errorCode === ErrorCodes.ErrAuthNoLoginPrivilege) {
+        messageKey = 'LOGIN..ERRORS.PRIVILEGES';
       }
+
+      error.error.uiErrorMessage = messageKey ? {
+        message: this.translateService.instant(messageKey),
+        title: this.translateService.instant('GENERAL.ERROR_TITLE')
+      } : undefined;
     }
 
-    const errorMessage: ErrorMessage = messageKey ? {
-      message: this.translateService.instant(messageKey),
-      title: this.translateService.instant(titleKey)
-    } : null;
-
-    return !errorMessage ? throwError(error) : this.errorHelperService.showError(errorMessage);
+    return throwError(error);
   }
 
   @Action(SaveTokenLocalStorage)

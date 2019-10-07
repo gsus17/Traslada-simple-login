@@ -10,7 +10,11 @@
     "FORM_PASSWORD_ERROR": "Password is required.",
     "FORM_KEEP_SESSION": "Do not log out when leaving.",
     "FORM_BUTTON": "Enter",
-    "FORM_RECOVERY_BUTTON": "Recover password"
+    "FORM_RECOVERY_BUTTON": "Recover password",
+    "ERRORS": {
+      "CREDENTIALS": "Las credenciales ingresadas son incorrectas. Por favor, intente nuevamente.",
+      "PRIVILEGES": "Su cuenta no tiene privilegios para acceder al sistema."
+    }
   },
   "GENERAL": {
     "ERROR_TITLE": "Ha ocurrido un error",
