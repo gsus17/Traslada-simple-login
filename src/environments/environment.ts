@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  api_domain: 'apolloteam.com.ar'
+  // api_domain: 'apolloteam.com.ar'
+  api_domain: 'zwitcher.com'
 };
 
 /*

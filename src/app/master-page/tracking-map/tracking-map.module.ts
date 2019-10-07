@@ -9,6 +9,7 @@ import { SuppliersApiModule } from 'src/api/suppliers/suppliers.module';
 import { TrackingApiModule } from 'src/api/tracking/tracking.module';
 import { NgxsModule } from '@ngxs/store';
 import { TrackingState } from './store/tracking-map.state';
+import { TrackingManagerService } from './tracking-manager.service';
 
 @NgModule({
   declarations: [TrackingMapComponent],
@@ -22,6 +23,6 @@ import { TrackingState } from './store/tracking-map.state';
     TrackingApiModule,
     NgxsModule.forFeature([TrackingState]),
   ],
-  providers: []
+  providers: [TrackingManagerService]
 })
 export class TrackingMapModule { }

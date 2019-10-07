@@ -11,10 +11,11 @@ import {
 import { SuppliersApiService } from 'src/api/suppliers/suppliers.service';
 import { TrackingApiService } from 'src/api/tracking/tracking.service';
 import { MarkerUI } from '../entities/marker-ui';
+import { TrackingPosition } from 'src/api/entities/tracking-position.entity';
 
 export interface TrackingStateModel {
   basesList: any[];
-  positions: any[];
+  positions: TrackingPosition[];
   filter: any;
   markerList: MarkerUI;
 }
@@ -39,6 +40,11 @@ export class TrackingState {
   @Selector()
   static basesList(state: TrackingStateModel) {
     return state.basesList;
+  }
+
+  @Selector()
+  static positions(state: TrackingStateModel) {
+    return state.positions;
   }
 
   constructor(
@@ -106,9 +112,24 @@ export class TrackingState {
   }
 
   @Action(TrackingGetPositionsSuccessAction)
-  trackingGetPositionsSuccessAction({ patchState }: StateContext<TrackingStateModel>, payload) {
+  trackingGetPositionsSuccessAction({ patchState }: StateContext<TrackingStateModel>, { response }) {
+    const markerList: MarkerUI = {};
+
+    response
+      .forEach(item => {
+        markerList[item.holderId] = {
+          marker: null,
+          icon: null,
+          status: null,
+          trips: null,
+          clickHandler: null,
+          tripsReference: null
+        };
+      });
+
     patchState({
-      positions: payload.response
+      positions: response,
+      markerList: markerList
     });
   }
 

@@ -13,6 +13,7 @@ import { AppI18nService } from './app-i18n.service';
 import { SharedState } from './shared-ngxs/shared.state';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { ErrorHandlerModule } from './error-handler/error-handler.module';
+import { AgmCoreModule } from '@agm/core';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -28,6 +29,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDHaY2fCRYWj811P1sSxxMi6omS9lsr4ls'
+    }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
