@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { ErrorMessage } from '../../api/entities/error-message.entity';
 import { ErrorCodes } from '../../api/entities/error-codes.enum';
 import { TranslateService } from '@ngx-translate/core';
@@ -11,7 +11,8 @@ export class ErrorHelperService {
 
   constructor(
     private translateService: TranslateService,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private ngZone: NgZone) { }
 
   public process(statusMessage: StatusMessage): ErrorMessage {
     let titleKey: string = null;
@@ -97,9 +98,11 @@ export class ErrorHelperService {
   /** Muestra un dialog de tipo alert con el mensaje especificado. */
   // tslint:disable-next-line:max-line-length
   public showError(errorMessage: ErrorMessage): void {
-    this.dialog.open(ErrorMessageModalComponent, {
-      width: '480px',
-      data: errorMessage
+    this.ngZone.run(() => {
+      this.dialog.open(ErrorMessageModalComponent, {
+        width: '480px',
+        data: errorMessage
+      });
     });
   }
 

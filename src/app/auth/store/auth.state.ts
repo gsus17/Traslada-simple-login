@@ -56,29 +56,7 @@ export class AuthState {
     return this.authApiService.login(loginRequest)
       .pipe(
         tap((response) => dispatch(new LoginSuccess(response))),
-        catchError((error) => {
-          dispatch(new DisabledProgressLinear());
-          let messageKey: string = null;
-          let titleKey: string = null;
-          const objectType: string = 'object';
-
-          if (objectType === typeof error) {
-            if (error.error.errorCode === ErrorCodes.ErrAuthInvalidCredentials) {
-              messageKey = 'AUTH.CREDENTIALS_INVALID';
-              titleKey = 'AUTH.ERROR';
-            } else if (error.errorCode === ErrorCodes.ErrAuthNoLoginPrivilege) {
-              messageKey = 'AUTH.CREDENTIALS_INVALID';
-              titleKey = 'AUTH.ERROR';
-            }
-          }
-
-          const errorMessage: ErrorMessage = messageKey ? {
-            message: this.translateService.instant(messageKey),
-            title: this.translateService.instant(titleKey)
-          } : null;
-
-          return !errorMessage ? throwError(error) : throwError(errorMessage);
-        }));
+        catchError((error) => of(dispatch(new LoginError(error)))));
   }
 
   @Action(Logout)
@@ -105,6 +83,30 @@ export class AuthState {
       new Navigate(['master-page/tracking'])
     ]);
   }
+  @Action(LoginError)
+  loginError({ getState, setState, dispatch }: StateContext<AuthStateModel>, { error }) {
+    dispatch(new DisabledProgressLinear());
+    let messageKey: string = null;
+    let titleKey: string = null;
+    const objectType: string = 'object';
+
+    if (objectType === typeof error) {
+      if (error.error.errorCode === ErrorCodes.ErrAuthInvalidCredentials) {
+        messageKey = 'AUTH.CREDENTIALS_INVALID';
+        titleKey = 'AUTH.ERROR';
+      } else if (error.errorCode === ErrorCodes.ErrAuthNoLoginPrivilege) {
+        messageKey = 'AUTH.CREDENTIALS_INVALID';
+        titleKey = 'AUTH.ERROR';
+      }
+    }
+
+    const errorMessage: ErrorMessage = messageKey ? {
+      message: this.translateService.instant(messageKey),
+      title: this.translateService.instant(titleKey)
+    } : null;
+
+    return !errorMessage ? throwError(error) : this.errorHelperService.showError(errorMessage);
+  }
 
   @Action(SaveTokenLocalStorage)
   saveTokenLocalStorage({ getState, setState }: StateContext<AuthStateModel>, payload) {
@@ -117,10 +119,5 @@ export class AuthState {
       ...state,
       token: token
     });
-  }
-
-  @Action(LoginError)
-  loginError({ getState, setState, dispatch }: StateContext<AuthStateModel>, { error }) {
-
   }
 }
